@@ -1,0 +1,20 @@
+language: php
+
+sudo: false
+
+php:
+  - '5.6'
+  - '7.0'
+  - '7.1'
+  - '7.2'
+
+env:
+  - COMPOSER_FLAGS= "--prefer-lowest"
+  - COMPOSER_FLAGS="--prefer-stable"
+
+install:
+  - composer update $COMPOSER_FLAGS
+
+script:
+  - composer validate --strict
+  - vendor/bin/phpunit

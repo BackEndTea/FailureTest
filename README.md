@@ -1,6 +1,6 @@
 # FailureTest
 
-Allow failing PHPUnit tests, to more easily manage your TODO's.
+Allow failing PHPUnit tests and keep a close eye on issues that have been fixed.
 
 ## Installation
 

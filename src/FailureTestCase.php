@@ -13,7 +13,7 @@ trait FailureTestCase
     {
         if (!$this->hasFailed()) {
             $this->hasFailed = false;
-            $this->fail('This test has passed all checks, move it to the successfull tests');
+            $this->fail('This test has passed all checks, move it to the successful tests');
         }
         $this->hasFailed = true;
         parent::tearDown();
@@ -26,7 +26,8 @@ trait FailureTestCase
         }
 
         $this->markTestIncomplete(
-            'This test has failed. Be sure to fix this in the next release.'
+            'This test has failed. Be sure to fix this in the next release.'.
+            ' The failure message was: ' . $t->getMessage()
         );
     }
 }

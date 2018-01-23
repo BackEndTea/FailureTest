@@ -2,8 +2,6 @@
 
 namespace FailureTest\Test;
 
-include_once __DIR__ . '/../vendor/autoload.php';
-
 use FailureTest\FailureTestCase;
 
 class FailureTestCaseTest extends TestCase

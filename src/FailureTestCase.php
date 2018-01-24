@@ -26,8 +26,8 @@ trait FailureTestCase
         }
 
         $this->markTestIncomplete(
-            'This test has failed. Be sure to fix this in the next release.'.
-            ' The failure message was: ' . $t->getMessage()
+            'This test has failed as expected.'.
+            ' The original failure message was: ' . $t->getMessage()
         );
     }
 }

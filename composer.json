@@ -1,13 +1,10 @@
 {
     "name": "backendtea/failuretest",
-    "description": "Allow failing PHPUnit tests and keep a close eye on issues that have been fixed.",
+    "description": "Allow failing PHPUnit tests and keep a close eye on issues until they are fixed.",
     "keywords": ["php", "phpunit", "unit testing", "failures"],
     "type": "library",
     "support": {
         "issues": "https://github.com/BackEndTea/FailureTest/issues"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.0 || ^6.0"
     },
     "license": "MIT",
     "authors": [
@@ -16,7 +13,9 @@
             "email": "gertp93@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+      "phpunit/phpunit": "^6.0"
+    },
     "autoload": {
         "psr-4": {
             "FailureTest\\": "src/"
@@ -26,8 +25,5 @@
         "psr-4": {
             "FailureTest\\Test\\": "tests/"
         }
-    },
-    "suggest": {
-        "phpunit/phpunit": "Used to run tests"
     }
 }

@@ -1,12 +1,16 @@
 # FailureTest
 
-Allow failing PHPUnit tests, to more easily manage your TODO's.
+Allow failing PHPUnit tests and keep a close eye on issues until they are fixed.
 
 ## Installation
 
 * Using [Composer](https://getcomposer.org/): `composer require backendtea/failuretest`
 
 Or simply copy the FailureTestCase.php into your project and include it yourself.
+
+## Requirements
+
+* phpunit version 6.0 or higher.
 
 ## Usage
 
@@ -26,13 +30,12 @@ class FailureTestCaseTest extends \PHPUnit\Framework\TestCase
 }
 ```
 
-Any test that has failed will show up as incomplete, with its failure message attached.
-Once a test actually passes all its criteria, it will be marked as a failure, which means you can move it to your normal tests.
+Any test that has failed will show up as incomplete, with its original failure message attached.
+Once a test actually passes all its criteria, it will be marked as a failure, with an error message explaining you can move it to the normal tests.
 
 ## Why
 
-An issue on page 3 of your github issues is easily forgotten. But these tests allow you to commit a failing test to your VCS, and serve as a reminder every time you run your tests.
+Instead of just creating an issue when finding a bug, someone can also contribute a failing test case.
+This makes sure the issue won't be forgotten, and it also allows another developer to better make sure they fixed the issue.
 
-## TODO
-
-Find out exactly what phpunit versions this package 'can' support.
+It can also serve as a nice 'todo' list, which can move with your code to another VCS if you so desire.

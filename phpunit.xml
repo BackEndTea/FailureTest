@@ -11,8 +11,11 @@
          syntaxCheck="false"
 >
     <testsuites>
-        <testsuite name="Test Suite">
-            <directory>./tests/</directory>
+        <testsuite name="failure">
+            <directory>./tests/Failure</directory>
+        </testsuite>
+        <testsuite name="success">
+            <directory>./tests/Success</directory>
         </testsuite>
     </testsuites>
 

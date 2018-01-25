@@ -1,6 +1,6 @@
 <?php
 
-namespace FailureTest\Test;
+namespace FailureTest\Test\Failure;
 
 use FailureTest\FailureTestCase;
 
@@ -8,8 +8,8 @@ class FailureTestCaseTest extends \PHPUnit\Framework\TestCase
 {
     use FailureTestCase;
 
-    public function test_it_handles_a_failure()
+    public function test_success_is_not_allowed()
     {
-        $this->assertTrue(false);
+        $this->assertTrue(true);
     }
 }

@@ -10,10 +10,16 @@ php:
 env:
   - COMPOSER_FLAGS="--prefer-lowest"
   - COMPOSER_FLAGS="--prefer-stable"
+  - TEST_SUITE="success"
+  - TEST_SUITE="failure"
+
+matrix:
+  allow_failures:
+  - TEST_SUITE="failure"
 
 install:
   - composer update $COMPOSER_FLAGS
 
 script:
   - composer validate --strict
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit --testsuite $TEST_SUITE

@@ -15,7 +15,6 @@ trait FailureTestCase
             $this->hasFailed = false;
             $this->fail('This test has passed all checks, move it to the successful tests');
         }
-        $this->hasFailed = true;
         parent::tearDown();
     }
 

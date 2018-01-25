@@ -2,40 +2,85 @@
 
 namespace FailureTest;
 
-/**
- * @mixin \PHPUnit\Framework\TestCase
- */
-trait AllowFailure
-{
-    private $mustFailButPassed = false;
+use FailureTest\Util\VersionHelper;
 
-    protected function tearDown()
+if (VersionHelper::getPHPUnitMajorVersion() === '6') {
+    /**
+     * @mixin \PHPUnit\Framework\TestCase | \PHPUnit_Framework_TestCase
+     */
+    trait AllowFailure
     {
-        $annotations = $this->getAnnotations();
-        if (!$this->hasFailed()) {
-            $this->mustFailButPassed = isset($annotations['method']['mustFail']) || isset($annotations['class']['mustFail']);
+        private $mustFailButPassed = false;
 
-            if ($this->mustFailButPassed) {
-                $this->fail('This test is supposed to fail.');
+        protected function tearDown()
+        {
+            $annotations = $this->getAnnotations();
+            if (!$this->hasFailed()) {
+                $this->mustFailButPassed = isset($annotations['method']['mustFail']) || isset($annotations['class']['mustFail']);
+
+                if ($this->mustFailButPassed) {
+                    $this->fail('This test is supposed to fail.');
+                }
             }
+
+            parent::tearDown();
         }
 
-        parent::tearDown();
+        protected function onNotSuccessfulTest(\Throwable $t)
+        {
+            $annotations = $this->getAnnotations();
+            $allowedFailure = isset($annotations['method']['allowedFailure']) || isset($annotations['class']['allowedFailure']);
+            $mustFail = isset($annotations['method']['mustFail']) || isset($annotations['class']['mustFail']);
+
+            if ($allowedFailure || ($mustFail && !$this->mustFailButPassed)) {
+                $this->markTestIncomplete(
+                    'This test has failed but is allowed to do so.'.
+                    ' The original failure message was: ' . $t->getMessage()
+                );
+            }
+
+            parent::onNotSuccessfulTest($t);
+        }
     }
-
-    protected function onNotSuccessfulTest(\Throwable $t)
+} elseif (VersionHelper::getPHPUnitMajorVersion() === '5') {
+    /**
+     * @mixin \PHPUnit_Framework_TestCase | \PHPUnit_Framework_TestCase
+     */
+    trait AllowFailure
     {
-        $annotations = $this->getAnnotations();
-        $allowedFailure = isset($annotations['method']['allowedFailure']) || isset($annotations['class']['allowedFailure']);
-        $mustFail = isset($annotations['method']['mustFail']) || isset($annotations['class']['mustFail']);
+        private $mustFailButPassed = false;
 
-        if ($allowedFailure || ($mustFail && !$this->mustFailButPassed)) {
-            $this->markTestIncomplete(
-                'This test has failed but is allowed to do so.'.
-                ' The original failure message was: ' . $t->getMessage()
-            );
+        protected function tearDown()
+        {
+            $annotations = $this->getAnnotations();
+            if (!$this->hasFailed()) {
+                $this->mustFailButPassed = isset($annotations['method']['mustFail']) || isset($annotations['class']['mustFail']);
+
+                if ($this->mustFailButPassed) {
+                    $this->fail('This test is supposed to fail.');
+                }
+            }
+
+            parent::tearDown();
         }
 
-        parent::onNotSuccessfulTest($t);
+        /**
+         * @param \Throwable $t
+         */
+        protected function onNotSuccessfulTest($t)
+        {
+            $annotations = $this->getAnnotations();
+            $allowedFailure = isset($annotations['method']['allowedFailure']) || isset($annotations['class']['allowedFailure']);
+            $mustFail = isset($annotations['method']['mustFail']) || isset($annotations['class']['mustFail']);
+
+            if ($allowedFailure || ($mustFail && !$this->mustFailButPassed)) {
+                $this->markTestIncomplete(
+                    'This test has failed but is allowed to do so.'.
+                    ' The original failure message was: ' . $t->getMessage()
+                );
+            }
+
+            parent::onNotSuccessfulTest($t);
+        }
     }
 }

@@ -7,7 +7,7 @@ use FailureTest\AllowFailure;
 /**
  * @mustFail
  */
-class MustFailClassTest extends \PHPUnit\Framework\TestCase
+class MustFailClassTest extends \FailureTest\Test\TestCase
 {
     use AllowFailure;
 

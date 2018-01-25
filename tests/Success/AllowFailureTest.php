@@ -47,4 +47,47 @@ class AllowFailureTest extends \PHPUnit\Framework\TestCase
     {
         throw new \Exception();
     }
+
+    /**
+     * @allowedFailure
+     * @dataProvider providesThings
+     */
+    public function test_with_dataProvider($input)
+    {
+        $this->assertTrue(is_numeric($input));
+    }
+
+    public function providesThings()
+    {
+        return [
+            [1],
+            ['b'],
+            [new \stdClass()],
+            [null],
+            [0.7],
+            ['1'],
+            ['8'],
+        ];
+    }
+
+    /**
+     * @mustFail
+     * @dataProvider providesNonNumerics
+     */
+    public function test_must_fail_with_data_provider($input)
+    {
+        $this->assertTrue(is_numeric($input));
+    }
+
+    public function providesNonNumerics()
+    {
+        return [
+
+            ['b'],
+            [new \stdClass()],
+            [null],
+            ['a sentence'],
+            [[]]
+        ];
+    }
 }

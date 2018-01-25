@@ -26,4 +26,24 @@ class AllowFailureClassTest extends \PHPUnit\Framework\TestCase
         throw new \Exception();
     }
 
+    /**
+     * @dataProvider providesThings
+     */
+    public function test_with_dataProvider($input)
+    {
+        $this->assertTrue(is_numeric($input));
+    }
+
+    public function providesThings()
+    {
+        return [
+            [1],
+            ['b'],
+            [new \stdClass()],
+            [null],
+            [0.7],
+            ['1'],
+            ['7'],
+        ];
+    }
 }

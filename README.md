@@ -14,6 +14,9 @@ Or simply copy the FailureTestCase.php into your project and include it yourself
 
 ## Usage
 
+**These traits make us of PHPUnits `tearDown()` function. If you override it, don't forget to call `parent::tearDown();`**
+
+### FailureTestCase
 ```php
 <?php 
 
@@ -32,6 +35,44 @@ class FailureTestCaseTest extends \PHPUnit\Framework\TestCase
 
 Any test that has failed will show up as incomplete, with its original failure message attached.
 Once a test actually passes all its criteria, it will be marked as a failure, with an error message explaining you can move it to the normal tests.
+
+### AllowFailure
+
+```php
+<?php 
+
+use FailureTest\AllowFailure;
+
+/**
+ * @allowedFailure 
+ */
+class FailureTestCaseTest extends \PHPUnit\Framework\TestCase
+{
+    use AllowFailure;
+
+    /** 
+     * @allowedFailure
+     */
+    public function test_it_handles_a_failure()
+    {
+        $this->assertTrue(false);
+    }
+    
+    /** 
+     * @allowedFailure
+     */
+    public function test_a_success_is_allowed()
+    {
+        $this->assertTrue(true);
+    }
+    
+}
+```
+
+The `AllowFailure` trait gives you access to two annotations: `@allowedFailure` and `@mustFail`. Both work on method or class level.
+
+ * `@allowedFailure` Will simply mark a test as incomplete if it 'fails', and if it passes it does nothing.
+ * `@mustFail` works the same as the `FailureTestCase`. Except you can configure it on function level.
 
 ## Why
 

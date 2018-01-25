@@ -3,6 +3,8 @@
 namespace FailureTest;
 
 /**
+ * @deprecated
+ *
  * @mixin \PHPUnit\Framework\TestCase
  */
 trait FailureTestCase

@@ -29,7 +29,7 @@ trait AllowFailure
         $allowedFailure = isset($annotations['method']['allowedFailure']) || isset($annotations['class']['allowedFailure']);
         $mustFail = isset($annotations['method']['mustFail']) || isset($annotations['class']['mustFail']);
 
-        if($allowedFailure ||($mustFail && !$this->mustFailButPassed)) {
+        if ($allowedFailure || ($mustFail && !$this->mustFailButPassed)) {
             $this->markTestIncomplete(
                 'This test has failed but is allowed to do so.'.
                 ' The original failure message was: ' . $t->getMessage()

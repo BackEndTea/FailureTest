@@ -89,4 +89,13 @@ class AllowFailureTest extends \FailureTest\Test\TestCase
             array(array())
         );
     }
+
+    /**
+     * @allowedFailure
+     * @mustFail
+     */
+    public function test_allowed_is_more_important()
+    {
+        $this->assertTrue(true);
+    }
 }

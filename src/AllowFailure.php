@@ -4,6 +4,10 @@ namespace FailureTest;
 
 use FailureTest\Util\VersionHelper;
 
+/**
+ * This whole contraption is used to not get php warning because the function signature doesn't match.
+ * If a new PHPUnit version changes the signature again it needs to be updated to match.
+ */
 if (VersionHelper::getPHPUnitMajorVersion() === '6') {
     /**
      * @mixin \PHPUnit\Framework\TestCase | \PHPUnit_Framework_TestCase
@@ -33,8 +37,11 @@ if (VersionHelper::getPHPUnitMajorVersion() === '6') {
             $mustFail = isset($annotations['method']['mustFail']) || isset($annotations['class']['mustFail']);
 
             if ($allowedFailure || ($mustFail && !$this->mustFailButPassed)) {
+                $message = $allowedFailure ?
+                    'This test has failed but is allowed to do so. ' :
+                    'This test has failed but is expected to do so. ';
                 $this->markTestIncomplete(
-                    'This test has failed but is allowed to do so.'.
+                    $message .
                     ' The original failure message was: ' . $t->getMessage()
                 );
             }

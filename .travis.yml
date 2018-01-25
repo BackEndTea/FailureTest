@@ -8,14 +8,15 @@ php:
   - '7.2'
 
 env:
-  - COMPOSER_FLAGS="--prefer-lowest"
-  - COMPOSER_FLAGS="--prefer-stable"
-  - TEST_SUITE="success"
-  - TEST_SUITE="failure"
+  - COMPOSER_FLAGS="--prefer-lowest" TEST_SUITE="success"
+  - COMPOSER_FLAGS="--prefer-stable" TEST_SUITE="success"
+  - COMPOSER_FLAGS="--prefer-lowest" TEST_SUITE="failure"
+  - COMPOSER_FLAGS="--prefer-stable" TEST_SUITE="failure"
 
 matrix:
   allow_failures:
-  - TEST_SUITE="failure"
+  -env: COMPOSER_FLAGS="--prefer-lowest" TEST_SUITE="failure"
+  -env:  COMPOSER_FLAGS="--prefer-stable" TEST_SUITE="failure"
 
 install:
   - composer update $COMPOSER_FLAGS

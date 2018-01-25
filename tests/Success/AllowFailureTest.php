@@ -25,10 +25,26 @@ class AllowFailureTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @allowedFailure
+     */
+    public function test_exception()
+    {
+        throw new \Exception();
+    }
+
+    /**
      * @mustFail
      */
     public function test_it_should_fail()
     {
         $this->assertTrue(false);
+    }
+
+    /**
+     * @mustFail
+     */
+    public function test_must_exception()
+    {
+        throw new \Exception();
     }
 }

@@ -17,4 +17,9 @@ class FailureTestCaseTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue(false);
     }
+
+    public function test_exception()
+    {
+        throw new \Exception();
+    }
 }

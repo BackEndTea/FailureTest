@@ -20,4 +20,10 @@ class AllowFailureClassTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue(true);
     }
+
+    public function test_exception()
+    {
+        throw new \Exception();
+    }
+
 }

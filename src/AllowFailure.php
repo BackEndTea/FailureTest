@@ -74,8 +74,11 @@ if (VersionHelper::getPHPUnitMajorVersion() === '6') {
             $mustFail = isset($annotations['method']['mustFail']) || isset($annotations['class']['mustFail']);
 
             if ($allowedFailure || ($mustFail && !$this->mustFailButPassed)) {
+                $message = $allowedFailure ?
+                    'This test has failed but is allowed to do so. ' :
+                    'This test has failed but is expected to do so. ';
                 $this->markTestIncomplete(
-                    'This test has failed but is allowed to do so.'.
+                    $message .
                     ' The original failure message was: ' . $t->getMessage()
                 );
             }

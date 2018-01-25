@@ -27,7 +27,7 @@ Once a test actually passes all its criteria, it will be marked as a failure, wi
 
 use FailureTest\AllowFailure;
 
-class FailureTestCaseTest extends \PHPUnit\Framework\TestCase
+class AllowFailureTest extends \PHPUnit\Framework\TestCase
 {
     use AllowFailure;
 
@@ -36,6 +36,7 @@ class FailureTestCaseTest extends \PHPUnit\Framework\TestCase
      */
     public function test_it_handles_a_failure()
     {
+        //This doesn't cause errors
         $this->assertTrue(false);
     }
     
@@ -44,6 +45,7 @@ class FailureTestCaseTest extends \PHPUnit\Framework\TestCase
      */
     public function test_a_success_is_allowed()
     {
+        //This doesn't cause errors
         $this->assertTrue(true);
     }
     

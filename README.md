@@ -74,9 +74,18 @@ The `AllowFailure` trait gives you access to two annotations: `@allowedFailure` 
  * `@allowedFailure` Will simply mark a test as incomplete if it 'fails', and if it passes it does nothing.
  * `@mustFail` works the same as the `FailureTestCase`. Except you can configure it on function level.
 
+`@allowedFailure` overrides `@mustfail`. So if both are present, be it on class or method, the test will not error if it succeeds.
+
 ## Why
 
 Instead of just creating an issue when finding a bug, someone can also contribute a failing test case.
 This makes sure the issue won't be forgotten, and it also allows another developer to better make sure they fixed the issue.
 
 It can also serve as a nice 'todo' list, which can move with your code to another VCS if you so desire.
+
+
+## Contributing
+
+If you find a bug, or want a feature, open an issue, or create a PR. 
+
+All tests in the `Failure` sub folder are supposed to fail, and the ones in the `Success` folder should not fail.

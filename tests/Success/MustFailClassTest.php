@@ -20,4 +20,12 @@ class MustFailClassTest extends \FailureTest\Test\TestCase
     {
         throw new \Exception();
     }
+
+    /**
+     * @allowedFailure
+     */
+    public function test_allowed_is_more_important()
+    {
+        $this->assertTrue(true);
+    }
 }

@@ -4,6 +4,10 @@ namespace FailureTest\Util;
 
 final class VersionHelper
 {
+    /**
+     * @return string
+     * @throws \Exception
+     */
     public static function getPHPUnitMajorVersion()
     {
         if (class_exists(\PHPUnit_Runner_Version::class)) {
@@ -20,6 +24,13 @@ final class VersionHelper
         return self::getFunctionType();
     }
 
+    /**
+     * Getting phpunit with --prefer-lowest will cause it to not be able to return a correct version value
+     * So we use a reflection class to determine what the our onNotSuccessfulTest is supposed to look like.
+     *
+     * @return string
+     * @throws \Exception
+     */
     private static function getFunctionType()
     {
         if (class_exists(\PHPUnit\Framework\TestCase::class)) {
@@ -33,7 +44,7 @@ final class VersionHelper
         $param = $testCase->getMethod('onNotSuccessfulTest')->getParameters()[0]->getClass();
 
         if ($param === null) {
-            $type = '';
+            return '5';
         } else {
             $type = $param->getName();
         }

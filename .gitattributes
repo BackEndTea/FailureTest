@@ -1,2 +1,4 @@
 #Files we do not want to distribute
 /tests export-ignore
+/TestCase export-ignore
+/.travis export-ignore

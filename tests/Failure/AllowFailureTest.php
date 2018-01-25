@@ -4,7 +4,7 @@ namespace FailureTest\Test\Failure;
 
 use FailureTest\AllowFailure;
 
-class AllowFailureTest extends \PHPUnit\Framework\TestCase
+class AllowFailureTest extends \FailureTest\Test\TestCase
 {
     use AllowFailure;
 

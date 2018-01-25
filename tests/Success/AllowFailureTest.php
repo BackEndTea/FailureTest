@@ -4,7 +4,7 @@ namespace FailureTest\Test\Success;
 
 use FailureTest\AllowFailure;
 
-class AllowFailureTest extends \PHPUnit\Framework\TestCase
+class AllowFailureTest extends \FailureTest\Test\TestCase
 {
     use AllowFailure;
 
@@ -59,15 +59,15 @@ class AllowFailureTest extends \PHPUnit\Framework\TestCase
 
     public function providesThings()
     {
-        return [
-            [1],
-            ['b'],
-            [new \stdClass()],
-            [null],
-            [0.7],
-            ['1'],
-            ['8'],
-        ];
+        return array(
+            array(1),
+            array('b'),
+            array(new \stdClass()),
+            array(null),
+            array(0.7),
+            array('1'),
+            array('8')
+        );
     }
 
     /**
@@ -81,13 +81,12 @@ class AllowFailureTest extends \PHPUnit\Framework\TestCase
 
     public function providesNonNumerics()
     {
-        return [
-
-            ['b'],
-            [new \stdClass()],
-            [null],
-            ['a sentence'],
-            [[]]
-        ];
+        return array(
+            array('b'),
+            array(new \stdClass()),
+            array(null),
+            array('a sentence'),
+            array(array())
+        );
     }
 }

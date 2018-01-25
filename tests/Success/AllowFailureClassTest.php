@@ -7,7 +7,7 @@ use FailureTest\AllowFailure;
 /**
  * @allowedFailure
  */
-class AllowFailureClassTest extends \PHPUnit\Framework\TestCase
+class AllowFailureClassTest extends \FailureTest\Test\TestCase
 {
     use AllowFailure;
 
@@ -36,14 +36,14 @@ class AllowFailureClassTest extends \PHPUnit\Framework\TestCase
 
     public function providesThings()
     {
-        return [
-            [1],
-            ['b'],
-            [new \stdClass()],
-            [null],
-            [0.7],
-            ['1'],
-            ['7'],
-        ];
+        return array(
+            array(1),
+            array('b'),
+            array(new \stdClass()),
+            array(null),
+            array(0.7),
+            array('1'),
+            array('8')
+        );
     }
 }
